@@ -1,0 +1,1042 @@
+[
+  {
+    "id": "CASE-01",
+    "type": "headway",
+    "question": "荃湾线早高峰断面30000人/时，车容1500人，车底45列，周转80分钟，安全限制120-480秒，求最优间隔。",
+    "standard_answer": "120.0s",
+    "standard_explanation": "运力上限要求 h ≤ 180s；车底周转下限要求 h ≥ 106.67s；安全界限 h ≥ 120s。取可行区间下限 max(106.67,120)=120s，满足运力要求，最优间隔120秒。",
+    "expected_type": "solve",
+    "params": {"Q": 30000, "C": 1500, "N": 45, "cycle_time": 80, "h_min": 120, "h_max": 480},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-02",
+    "type": "headway",
+    "question": "港岛线傍晚断面54000人/时，车容1500人，车底24列，周转64分钟，安全限制120-480秒，求最优间隔。",
+    "standard_answer": "Infeasible",
+    "standard_explanation": "运力要求 h ≤ 100s；车底周转要求 h ≥ 160s。可行区间需满足 h ≤ 100 且 h ≥ 160，无解。",
+    "expected_type": "diagnostic",
+    "params": {"Q": 54000, "C": 1500, "N": 24, "cycle_time": 64, "h_min": 120, "h_max": 480},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-03",
+    "type": "headway",
+    "question": "港岛线晚高峰金钟站拥挤，已知列车容量1500人，但缺少断面客流和可用车底数，求最优间隔。",
+    "standard_answer": "MissingParameters",
+    "standard_explanation": "优化发车间隔需要断面客流量Q和可用车底数N，输入信息缺失，无法求解。",
+    "expected_type": "diagnostic",
+    "params": {"Q": null, "C": 1500, "N": null, "cycle_time": null, "h_min": null, "h_max": null},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-04",
+    "type": "delay",
+    "question": "荃湾线一列车在荔枝角站因车门故障初始延误15分钟，恢复系数0.6，经过2次传播后后续列车延误时间？",
+    "standard_answer": "5.4 minutes",
+    "standard_explanation": "初始15min -> 15*0.6=9min -> 9*0.6=5.4min。",
+    "expected_type": "solve",
+    "params": {"delay_minutes": 15.0, "recovery_factor": 0.6, "affected_section": "荔枝角"},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-05",
+    "type": "headway",
+    "question": "东涌线深夜非高峰断面6000人/时，车容1500人，车底15列，周转102分钟，安全限制150-600秒，求最优间隔。",
+    "standard_answer": "408.0s",
+    "standard_explanation": "运力 h ≤ 900s (受限于600s)；车底 h ≥ 408s；安全 h ≥ 150s。最小化等待取 408s。",
+    "expected_type": "solve",
+    "params": {"Q": 6000, "C": 1500, "N": 15, "cycle_time": 102, "h_min": 150, "h_max": 600},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-06",
+    "type": "headway",
+    "question": "港岛线早高峰断面40000人/时，车容1500人，车底42列，周转64分钟，安全限制120-480s，求最优间隔。",
+    "standard_answer": "[120.0, 135.0]s",
+    "standard_explanation": "运力上限要求 h≤135s；车底周转下限要求 h≥91.4s；安全界限 h≥120s。最优可行区间为 [120.0, 135.0] 秒。",
+    "expected_type": "solve",
+    "params": {"Q": 40000, "C": 1500, "N": 42, "cycle_time": 64, "h_min": 120, "h_max": 480},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-07",
+    "type": "headway",
+    "question": "东铁线断面45000人/时，车容1500人，车底50列，周转110分钟，限制120-600s，求最优间隔。",
+    "standard_answer": "Infeasible",
+    "standard_explanation": "运力要求 h≤120s；车底周转要求 h≥132s。物理冲突无解。",
+    "expected_type": "diagnostic",
+    "params": {"Q": 45000, "C": 1500, "N": 50, "cycle_time": 110, "h_min": 120, "h_max": 600},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-08",
+    "type": "headway",
+    "question": "荃湾线非高峰断面8000人/时，车容1500人，车底9列，周转80分钟，限制120-480s，求最优间隔。",
+    "standard_answer": "Infeasible",
+    "standard_explanation": "周转下限大于设备最大间隔，无可行解。",
+    "expected_type": "diagnostic",
+    "params": {"Q": 8000, "C": 1500, "N": 9, "cycle_time": 80, "h_min": 120, "h_max": 480},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-09",
+    "type": "headway",
+    "question": "东涌线最优发车间隔调整（当前无Q, C, N输入），限制150-600s。",
+    "standard_answer": "MissingParameters",
+    "standard_explanation": "缺失断面客流量(Q)、车容(C)及车底数(N)，模型无法建立约束矩阵。",
+    "expected_type": "diagnostic",
+    "params": {"Q": null, "C": null, "N": null, "h_min": 150, "h_max": 600},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-10",
+    "type": "headway",
+    "question": "港岛线周末午间断面18000人/时，车容1500人，车底28列，周期64分钟，求最优间隔。",
+    "standard_answer": "[137.1, 300.0]s",
+    "standard_explanation": "最优可行区间为 [137.1, 300.0] 秒。",
+    "expected_type": "solve",
+    "params": {"Q": 18000, "C": 1500, "N": 28, "cycle_time": 64, "h_min": 120, "h_max": 480},
+    "constraint_mapping": {}
+  },
+{
+    "id": "CASE-11",
+    "type": "capacity",
+    "question": "荃湾线断面22000人/时，车容1500人，目标负载0.85，求每小时最小配置运力。",
+    "standard_answer": "18",
+    "standard_explanation": "有效运力计算：22000/(1500*0.85) = 17.25，向上取整为 18 列。荃湾线周转80分钟，需车底 18*(80/60)=24列，满足默认30列上限，可行。",
+    "expected_type": "solve",
+    "params": {"Q": 22000, "C": 1500, "target_load_factor": 0.85},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-12",
+    "type": "capacity",
+    "question": "东铁线断面20000人/时，车容1500人，负载率1.0，求理论最小开行运力。",
+    "standard_answer": "14",
+    "standard_explanation": "班次下限 Q/C = 20000/1500 = 13.33，向上取整为 14 列。东铁线周转110分钟，需车底 14*(110/60)=25.6列，满足30列上限，可行。",
+    "expected_type": "solve",
+    "params": {"Q": 20000, "C": 1500, "target_load_factor": 1.0},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-13",
+    "type": "capacity",
+    "question": "评估未知客流线路运力饱和度，已知车容1500人。",
+    "standard_answer": "MissingParameters",
+    "standard_explanation": "缺失断面客流量(Q)进行负载率对比。",
+    "expected_type": "diagnostic",
+    "params": {"Q": null, "C": 1500},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-14",
+    "type": "capacity",
+    "question": "港岛线非高峰断面12000人/时，车容1500人，目标负载0.85，求最经济班次。",
+    "standard_answer": "10",
+    "standard_explanation": "计算公式 Q/(C*0.85) = 12000/1275 = 9.41，向上取整为 10 列。",
+    "expected_type": "solve",
+    "params": {"Q": 12000, "C": 1500, "target_load_factor": 0.85},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-15",
+    "type": "capacity",
+    "question": "东涌线断面14000人/时，车容1500人，目标负载0.70，求最少班次。",
+    "standard_answer": "14",
+    "standard_explanation": "满足需求计算：14000/(1500*0.70) = 13.33列，向上取整得到 14 列。东涌线周转102分钟，需车底 14*(102/60)=23.8列，可行。",
+    "expected_type": "solve",
+    "params": {"Q": 14000, "C": 1500, "target_load_factor": 0.70},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-16",
+    "type": "delay",
+    "question": "东铁线初始延误20分钟，自然恢复系数0.6。现要求通过调整后续列车发车间隔（允许范围120s-600s）来加速恢复，求使延误完全消除的最少列车班次数量。",
+    "standard_answer": "Optimal",
+    "standard_explanation": "建立延误传播与发车间隔相关的混合整数规划模型，目标函数为最小化波及的列车班次数，约束包括延误递推方程和间隔上下限。",
+    "expected_type": "solve",
+    "params": {"delay_minutes": 20.0, "recovery_factor": 0.6, "h_min": 120, "h_max": 600},
+    "constraint_mapping": {"DelayPropagation": ["D_k"], "HeadwayBound": ["h_k"]}
+  },
+  {
+    "id": "CASE-17",
+    "type": "delay",
+    "question": "荃湾线发生10分钟初始延误。若采取停站时间压缩策略（每站最多压缩10秒），在保证最小发车间隔120秒的安全限制下，求最小化第一阶段传播延误的最优策略。",
+    "standard_answer": "Optimal",
+    "standard_explanation": "将停站时间压缩量设为决策变量，结合恢复系数约束，优化首波延误残留。",
+    "expected_type": "solve",
+    "params": {"delay_minutes": 10.0, "recovery_factor": 0.6, "max_dwell_reduction": 10, "h_min": 120},
+    "constraint_mapping": {"DwellReductionLimit": ["dwell_reduction"], "SafetyHeadway": ["h_min"]}
+  },
+  {
+    "id": "CASE-18",
+    "type": "delay",
+    "question": "港岛线发生故障，恢复系数0.6，缺失初始延误。",
+    "standard_answer": "MissingParameters",
+    "standard_explanation": "缺失初始延误(delay_minutes)作为边界条件。",
+    "expected_type": "diagnostic",
+    "params": {"delay_minutes": null, "recovery_factor": 0.6},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-19",
+    "type": "delay",
+    "question": "东涌线初始延误8分，恢复系数0.5，求2次传播后延误。",
+    "standard_answer": "2.0",
+    "standard_explanation": "二阶传播：8 * 0.5^2 = 2.0 分钟。",
+    "expected_type": "solve",
+    "params": {"delay_minutes": 8.0, "recovery_factor": 0.5},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-20",
+    "type": "delay",
+    "question": "港岛线初始延误30分，恢复系数0.6，求第4阶段延误。",
+    "standard_answer": "3.89",
+    "standard_explanation": "四阶传播：30 * 0.6^4 = 3.888 分钟。",
+    "expected_type": "solve",
+    "params": {"delay_minutes": 30.0, "recovery_factor": 0.6},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-21",
+    "type": "rescheduling",
+    "question": "某线路5列车累积初始延误40分钟。现有两种挽回策略：提速（最多挽回15分，成本权重2）和越站（最多挽回20分，成本权重5）。在总成本权重不超过40的前提下，求最小化净延误的组合策略。",
+    "standard_answer": "Optimal",
+    "standard_explanation": "典型背包/资源分配优化问题。最小化: 40 - (x1 + x2)，约束: 2*x1 + 5*x2 <= 40 且 x1<=15, x2<=20。",
+    "expected_type": "solve",
+    "params": {"delay_minutes": 40.0, "max_speed_recovery": 15, "max_skip_recovery": 20, "max_cost": 40},
+    "constraint_mapping": {"CostLimit": ["x1", "x2"], "RecoveryLimit": ["x1", "x2"]}
+  },
+  {
+    "id": "CASE-22",
+    "type": "rescheduling",
+    "question": "大埔墟站故障，需重调度（缺失参数）。",
+    "standard_answer": "MissingParameters",
+    "standard_explanation": "缺失延误及受影响列车数据。",
+    "expected_type": "diagnostic",
+    "params": {"delay_minutes": null, "affected_trains": null},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-23",
+    "type": "rescheduling",
+    "question": "8列车发生60分钟延误。为了挽回延误，可以采取压缩停站时间和提高运行速度。已知系统总挽回能力上限为42分钟，在满足安全间隔（h_min=120）的前提下，求最优调度策略以最小化残留延误。",
+    "standard_answer": "Optimal",
+    "standard_explanation": "引入系统总挽回能力约束，通过 Gurobi 分配各列车的挽回时间量，求解最小净延误。",
+    "expected_type": "solve",
+    "params": {"delay_minutes": 60.0, "affected_trains": 8, "max_recovered_minutes": 42.0, "h_min": 120},
+    "constraint_mapping": {"MaxRecovery": ["recovered_minutes"], "SafetyHeadway": ["h_min"]}
+  },
+  {
+    "id": "CASE-24",
+    "type": "rescheduling",
+    "question": "3列车延误15分钟。若启动备用车底（固定耗时5分钟，最多启动2列）或直接调整后续列车间隔（至少120秒）。求最小化乘客总延误的恢复方案。",
+    "standard_answer": "Optimal",
+    "standard_explanation": "混合整数规划：0-1变量控制是否启动备用车底，连续变量控制发车间隔。",
+    "expected_type": "solve",
+    "params": {"delay_minutes": 15.0, "affected_trains": 3, "backup_train_time": 5, "max_backup_trains": 2, "h_min": 120},
+    "constraint_mapping": {"BackupLimit": ["use_backup"], "HeadwayLimit": ["h"]}
+  },
+  {
+    "id": "CASE-25",
+    "type": "rescheduling",
+    "question": "10列车总延误120分钟。系统最大可挽回50分钟，但每挽回1分钟会增加单位能耗。要求在能耗增量不超过限制的条件下，求平衡延误与能耗的最优目标值。",
+    "standard_answer": "Optimal",
+    "standard_explanation": "多目标优化问题（Pareto前沿）。在能耗约束下最小化 (延误 - 挽回量)。",
+    "expected_type": "solve",
+    "params": {"delay_minutes": 120.0, "affected_trains": 10, "max_recovered_minutes": 50.0},
+    "constraint_mapping": {"EnergyConstraint": ["recovered_minutes"], "DelayBalance": ["net_delay"]}
+  },
+  {
+    "id": "CASE-26",
+    "type": "timetabling",
+    "question": "给定12个图定班次，区间运行时间90秒，停站时间30秒。要求列车间安全发车间隔不低于120秒，且首尾班次总跨度不超过1500秒，求最小化乘客平均等待时间的时刻表配置。",
+    "standard_answer": "Optimal",
+    "standard_explanation": "时刻表优化模型。目标函数为最小化总发车间隔，约束条件包括运行停站时间固定、发车间隔下限及总跨度上限。",
+    "expected_type": "solve",
+    "params": {"trip_count": 12, "run_time_sec": 90, "dwell_time_sec": 30, "min_headway": 120, "max_span_sec": 1500},
+    "constraint_mapping": {"SpanLimit": ["t_arr", "t_dep"], "HeadwayLimit": ["h"]}
+  },
+  {
+    "id": "CASE-27",
+    "type": "timetabling",
+    "question": "需安排6个图定班次，要求满足单任务耗时180秒（包含运行与停站）。在车底周转时间限制和最小发车间隔240秒的条件下，求最小化运营总跨度。",
+    "standard_answer": "Optimal",
+    "standard_explanation": "经典的列车运行图跨度最小化问题，Gurobi 将求解最优发车时距集。",
+    "expected_type": "solve",
+    "params": {"trip_count": 6, "run_time_sec": 150, "dwell_time_sec": 30, "min_headway": 240},
+    "constraint_mapping": {"TaskDuration": ["t_run", "t_dwell"], "MinHeadway": ["h"]}
+  },
+  {
+    "id": "CASE-28",
+    "type": "timetabling",
+    "question": "东涌线时刻表安排（参数缺失）。",
+    "standard_answer": "MissingParameters",
+    "standard_explanation": "缺失任务数或间隔参数。",
+    "expected_type": "diagnostic",
+    "params": {"trip_count": null, "min_headway": null},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-29",
+    "type": "timetabling",
+    "question": "4个班次，单耗200s，间隔180s，求最优跨度。",
+    "standard_answer": "740.0",
+    "standard_explanation": "跨度 = 3*180 + 200 = 740s。",
+    "expected_type": "solve",
+    "params": {"trip_count": 4, "run_time_sec": 170, "dwell_time_sec": 30, "min_headway": 180},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-30",
+    "type": "timetabling",
+    "question": "要求在高峰期排入20个班次，已知单程运行时间80秒，停站20秒。为防止站台过载，相邻两列车到站间隔严格控制在90秒至150秒之间，求使得线路总耗时最短的时刻表。",
+    "standard_answer": "Optimal",
+    "standard_explanation": "带有严格发车窗口约束的排班优化。决策变量为每一列车的发车时间。",
+    "expected_type": "solve",
+    "params": {"trip_count": 20, "run_time_sec": 80, "dwell_time_sec": 20, "min_headway": 90, "max_headway": 150},
+    "constraint_mapping": {"TimeWindow": ["h_k"], "Runtime": ["t_run"]}
+  },
+  {
+    "id": "CASE-31",
+    "type": "rolling_stock",
+    "question": "现有80个图定运营任务，车场可用车底最多35列。任务间存在时空接续网络，要求在满足理论接续下限（至少28列）的情况下，求解最小化投入车底数的接续方案。",
+    "standard_answer": "Optimal",
+    "standard_explanation": "标准的车底交路（Rolling Stock Circulation）网络流模型，求解最小流/最小路径覆盖。",
+    "expected_type": "solve",
+    "params": {"trip_set_size": 80, "fleet_size": 35, "min_required_theoretical": 28},
+    "constraint_mapping": {"FleetCapacity": ["x_ij"], "TaskCover": ["x_ij"]}
+  },
+  {
+    "id": "CASE-32",
+    "type": "rolling_stock",
+    "question": "150任务，可用30列车，物理需34列，求状态。",
+    "standard_answer": "Infeasible",
+    "standard_explanation": "34 > 30，供给不足。",
+    "expected_type": "diagnostic",
+    "params": {"trip_set_size": 150, "fleet_size": 30, "min_required_theoretical": 34},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-33",
+    "type": "rolling_stock",
+    "question": "车底调度优化（参数缺失）。",
+    "standard_answer": "MissingParameters",
+    "standard_explanation": "缺失车底调度参数。",
+    "expected_type": "diagnostic",
+    "params": {"trip_set": null, "fleet_size": null},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-34",
+    "type": "rolling_stock",
+    "question": "30任务，可用10列车，需8列，求最优。",
+    "standard_answer": "Optimal",
+    "standard_explanation": "8 ≤ 10，可行。",
+    "expected_type": "solve",
+    "params": {"trip_set_size": 30, "fleet_size": 10, "min_required_theoretical": 8},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-35",
+    "type": "rolling_stock",
+    "question": "60任务，可用15列车，需12列，求状态。",
+    "standard_answer": "Optimal",
+    "standard_explanation": "12 ≤ 15，可行。",
+    "expected_type": "solve",
+    "params": {"trip_set_size": 60, "fleet_size": 15, "min_required_theoretical": 12},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-36",
+    "type": "crew",
+    "question": "40个乘务任务，现有25组司机。要求每组司机连续驾驶不超过4小时（240分钟），且每项任务必须且只能被1组司机覆盖。求满足所有工作规则的最优派班计划。",
+    "standard_answer": "Optimal",
+    "standard_explanation": "乘务排班（Crew Scheduling）的集合划分/覆盖问题。Gurobi 求解二进制指派变量。",
+    "expected_type": "solve",
+    "params": {"trip_set_size": 40, "crew_size": 25, "max_continuous_work": 240, "min_crew_theoretical": 18},
+    "constraint_mapping": {"TaskAssignment": ["x_ij"], "WorkloadLimit": ["y_i"]}
+  },
+  {
+    "id": "CASE-37",
+    "type": "crew",
+    "question": "20任务，可用5名司机，需7名，求状态。",
+    "standard_answer": "Infeasible",
+    "standard_explanation": "7 > 5，人力不足。",
+    "expected_type": "diagnostic",
+    "params": {"trip_set_size": 20, "crew_size": 5, "min_crew_theoretical": 7},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-38",
+    "type": "crew",
+    "question": "乘务排班（参数缺失）。",
+    "standard_answer": "MissingParameters",
+    "standard_explanation": "缺失排班参数。",
+    "expected_type": "diagnostic",
+    "params": {"trip_set": null, "crew_size": null},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-39",
+    "type": "crew",
+    "question": "15个运营任务，8名可用司机。要求每名司机接续任务的间隔不得小于10分钟以作休息。求最小化使用司机人数的最优派班方案。",
+    "standard_answer": "Optimal",
+    "standard_explanation": "引入休息时间约束的指派问题，求解所需的最少乘务组数量。",
+    "expected_type": "solve",
+    "params": {"trip_set_size": 15, "crew_size": 8, "min_rest_time": 10, "min_crew_theoretical": 5},
+    "constraint_mapping": {"RestTime": ["x_ij"], "CrewLimit": ["crew_usage"]}
+  },
+  {
+    "id": "CASE-40",
+    "type": "passenger_assignment",
+    "question": "3节点，15000人次，求分配。",
+    "standard_answer": "Optimal",
+    "standard_explanation": "流量守恒约束满足。",
+    "expected_type": "solve",
+    "params": {"OD_matrix_total": 15000},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-41",
+    "type": "passenger_assignment",
+    "question": "全网客流模拟（缺少OD矩阵）。",
+    "standard_answer": "MissingParameters",
+    "standard_explanation": "缺失OD矩阵。",
+    "expected_type": "diagnostic",
+    "params": {"OD_matrix": null},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-42",
+    "type": "crowding",
+    "question": "某站客流到达率为500人/分，站台最大疏散能力为600人/分。求在站台最大滞留人数绝对不能超过1000人的硬性约束下，最优的列车发车间隔阈值。",
+    "standard_answer": "Optimal",
+    "standard_explanation": "排队论结合优化。建立积压人数与发车间隔的函数，限制峰值积压量。",
+    "expected_type": "solve",
+    "params": {"station_flow_arrival": 500, "station_service_rate": 600, "max_platform_capacity": 1000},
+    "constraint_mapping": {"PlatformCapacity": ["queue_length"], "ServiceRate": ["h"]}
+  },
+  {
+    "id": "CASE-43",
+    "type": "crowding",
+    "question": "到达800人/分，能力700人/分，求状态。",
+    "standard_answer": "Unbounded",
+    "standard_explanation": "ρ > 1.0，队列不稳定。",
+    "expected_type": "diagnostic",
+    "params": {"station_flow_arrival": 800, "station_service_rate": 700},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-44",
+    "type": "energy",
+    "question": "8.5km，100km/h，目标耗时400s，求最优节能点。",
+    "standard_answer": "4.2",
+    "standard_explanation": "经积分优化，最优惰行切入点为 4.2km。",
+    "expected_type": "solve",
+    "params": {"distance": 8.5, "speed_limit": 100},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-45",
+    "type": "energy",
+    "question": "节能测试（缺失参数）。",
+    "standard_answer": "MissingParameters",
+    "standard_explanation": "缺失节能模型参数。",
+    "expected_type": "diagnostic",
+    "params": {"distance": null, "speed_limit": null},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-46",
+    "type": "regenerative",
+    "question": "制动列车产生再生能量800kW，此时对向牵引列车需求1200kW。考虑牵引网直流传输损耗为10%，求在此供电区间内的最优列车发车时距偏移量，以最大化再生能量利用率。",
+    "standard_answer": "Optimal",
+    "standard_explanation": "基于能量供需匹配的时刻表微调优化。通过调整时距偏移，最大化重叠时间的能量吸收。",
+    "expected_type": "solve",
+    "params": {"generated_power": 800, "required_power": 1200, "transmission_loss": 0.1, "max_offset_sec": 30},
+    "constraint_mapping": {"PowerMatch": ["offset_time"], "OffsetLimit": ["offset_time"]}
+  },
+  {
+    "id": "CASE-47",
+    "type": "regenerative",
+    "question": "发电600kW，无其他牵引，求指派。",
+    "standard_answer": "0%",
+    "standard_explanation": "无牵引负载消化能量，所有制动电流均转化为热损耗，吸收值为 0。",
+    "expected_type": "solve",
+    "params": {"generated_power": 600, "required_power": 0},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-48",
+    "type": "network_flow",
+    "question": "5节点，容量500，需求350，求流。",
+    "standard_answer": "Optimal",
+    "standard_explanation": "需求(350) ≤ 路径最大通流(500)，各节点流量平衡完美闭环。",
+    "expected_type": "solve",
+    "params": {"total_demand_flow": 350, "arc_capacity_limit": 500},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-49",
+    "type": "network_flow",
+    "question": "50节点疏散（参数缺失）。",
+    "standard_answer": "MissingParameters",
+    "standard_explanation": "缺失网络流参数。",
+    "expected_type": "diagnostic",
+    "params": {"total_demand_flow": null, "arc_capacity_limit": null},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-50",
+    "type": "integrated_mtr",
+    "question": "高峰客流30000，车容1500，45列车，周转80分，延误15分，综合评估。",
+    "standard_answer": "Optimal",
+    "standard_explanation": "系统多约束收敛。",
+    "expected_type": "solve",
+    "params": {"Q": 30000, "C": 1500, "N": 45, "cycle_time": 80, "delay_minutes": 15.0, "recovery_factor": 0.6},
+    "constraint_mapping": {}
+  },
+  {
+    "id": "CASE-51",
+    "type": "headway",
+    "question": "荃湾线常规时段断面20000人/时，车容1500人，车底30列，周转60分钟，安全限制120-480秒，求最优间隔。",
+    "standard_answer": "120.0s",
+    "standard_explanation": "运力要求 h ≤ 270s；车底周转要求 h ≥ 120s；安全下限 120s。最优间隔取下限 120 秒。",
+    "expected_type": "solve",
+    "params": {"Q": 20000, "C": 1500, "N": 30, "cycle_time": 60, "h_min": 120, "h_max": 480}
+  },
+  {
+    "id": "CASE-52",
+    "type": "headway",
+    "question": "东涌线早高峰断面45000人/时，车容1500人，车底40列，周转80分钟，安全限制120-480秒，求最优间隔。",
+    "standard_answer": "120.0s",
+    "standard_explanation": "运力要求 h ≤ 120s；车底周转要求 h ≥ 120s。刚性重合，最优 120 秒。",
+    "expected_type": "solve",
+    "params": {"Q": 45000, "C": 1500, "N": 40, "cycle_time": 80, "h_min": 120, "h_max": 480}
+  },
+  {
+    "id": "CASE-53",
+    "type": "headway",
+    "question": "港岛线极端高峰断面60000人/时，车容1500人，车底30列，周转60分钟，安全限制120-480秒，求最优间隔。",
+    "standard_answer": "Infeasible",
+    "standard_explanation": "运力要求 h ≤ 90s，但安全下限和周转均要求 h ≥ 120s，存在物理冲突，无解。",
+    "expected_type": "diagnostic",
+    "params": {"Q": 60000, "C": 1500, "N": 30, "cycle_time": 60, "h_min": 120, "h_max": 480}
+  },
+  {
+    "id": "CASE-54",
+    "type": "headway",
+    "question": "迪士尼线断面15000人/时，车容1000人，车底20列，周转60分钟，安全限制150-600秒，求最优间隔。",
+    "standard_answer": "180.0s",
+    "standard_explanation": "运力要求 h ≤ 240s；车底周转 h ≥ 180s。最小等待时间取下限 180 秒。",
+    "expected_type": "solve",
+    "params": {"Q": 15000, "C": 1000, "N": 20, "cycle_time": 60, "h_min": 150, "h_max": 600}
+  },
+  {
+    "id": "CASE-55",
+    "type": "headway",
+    "question": "东铁线非高峰断面10000人/时，车容1500人，车底5列，周转80分钟，安全限制120-600秒，求最优间隔。",
+    "standard_answer": "Infeasible",
+    "standard_explanation": "车底周转要求 h ≥ 960s，超出了最大安全间隔上限 600s，无解。",
+    "expected_type": "diagnostic",
+    "params": {"Q": 10000, "C": 1500, "N": 5, "cycle_time": 80, "h_min": 120, "h_max": 600}
+  },
+  {
+    "id": "CASE-56",
+    "type": "headway",
+    "question": "港岛线最优发车间隔调整，当前系统未收到可用车底数输入，限制120-480s。",
+    "standard_answer": "MissingParameters",
+    "standard_explanation": "优化发车间隔需要车底数(N)，参数缺失。",
+    "expected_type": "diagnostic",
+    "params": {"Q": 30000, "C": 1500, "N": null, "h_min": 120, "h_max": 480}
+  },
+  {
+    "id": "CASE-57",
+    "type": "headway",
+    "question": "东涌线断面28000人/时，车容1500人，车底35列，周转70分钟，求最优间隔。",
+    "standard_answer": "120.0s",
+    "standard_explanation": "运力要求 h ≤ 192.8s；车底周转 h ≥ 120s，最优取 120s。",
+    "expected_type": "solve",
+    "params": {"Q": 28000, "C": 1500, "N": 35, "cycle_time": 70, "h_min": 120, "h_max": 600}
+  },
+  {
+    "id": "CASE-58",
+    "type": "headway",
+    "question": "荃湾线晚间客流未知，评估安全限制内的最佳间隔配置。",
+    "standard_answer": "MissingParameters",
+    "standard_explanation": "缺失客流量(Q)。",
+    "expected_type": "diagnostic",
+    "params": {"Q": null, "C": 1500, "N": 30, "h_min": 120, "h_max": 480}
+  },
+  {
+    "id": "CASE-59",
+    "type": "capacity",
+    "question": "东铁线断面40000人/时，车容1500人，目标负载0.80，求每小时最小配置运力。",
+    "standard_answer": "34",
+    "standard_explanation": "40000/(1500*0.8) = 33.33，向上取整为 34 列。",
+    "expected_type": "solve",
+    "params": {"Q": 40000, "C": 1500, "target_load_factor": 0.8}
+  },
+  {
+    "id": "CASE-60",
+    "type": "capacity",
+    "question": "荃湾线断面22000人/时，车容1500人，目标负载0.85，求最经济班次。",
+    "standard_answer": "18",
+    "standard_explanation": "22000/(1500*0.85) = 17.25，向上取整为 18 列。",
+    "expected_type": "solve",
+    "params": {"Q": 22000, "C": 1500, "target_load_factor": 0.85}
+  },
+  {
+    "id": "CASE-61",
+    "type": "capacity",
+    "question": "港岛线拥挤时段断面55000人/时，扩容列车容量2000人，目标负载0.90，求运力要求。",
+    "standard_answer": "31",
+    "standard_explanation": "55000/(2000*0.9) = 30.55，向上取整为 31 列。",
+    "expected_type": "solve",
+    "params": {"Q": 55000, "C": 2000, "target_load_factor": 0.9}
+  },
+  {
+    "id": "CASE-62",
+    "type": "capacity",
+    "question": "迪士尼线断面18000人/时，车容1000人，目标负载0.75，求最经济运力。",
+    "standard_answer": "24",
+    "standard_explanation": "18000/(1000*0.75) = 24 列。",
+    "expected_type": "solve",
+    "params": {"Q": 18000, "C": 1000, "target_load_factor": 0.75}
+  },
+  {
+    "id": "CASE-63",
+    "type": "capacity",
+    "question": "东涌线满载测试，断面30000人/时，车容1500人，负载率1.0，求最小班次。",
+    "standard_answer": "20",
+    "standard_explanation": "30000/1500 = 20 列。",
+    "expected_type": "solve",
+    "params": {"Q": 30000, "C": 1500, "target_load_factor": 1.0}
+  },
+  {
+    "id": "CASE-64",
+    "type": "capacity",
+    "question": "评估线路容量要求，目标负载0.8，但未接入票务客流数据。",
+    "standard_answer": "MissingParameters",
+    "standard_explanation": "缺失断面客流量(Q)。",
+    "expected_type": "diagnostic",
+    "params": {"Q": null, "C": 1500, "target_load_factor": 0.8}
+  },
+  {
+    "id": "CASE-65",
+    "type": "capacity",
+    "question": "东铁线断面42000人/时，车容1500人，目标负载0.85，求最经济班次。",
+    "standard_answer": "33",
+    "standard_explanation": "42000/(1500*0.85) = 32.94，向上取整为 33 列。",
+    "expected_type": "solve",
+    "params": {"Q": 42000, "C": 1500, "target_load_factor": 0.85}
+  },
+  {
+    "id": "CASE-66",
+    "type": "delay",
+    "question": "一列车故障导致初始延误25分钟，若恢复系数极好为0.5，传播2次后的延误是？",
+    "standard_answer": "6.25",
+    "standard_explanation": "25 * 0.5^2 = 6.25 分钟。",
+    "expected_type": "solve",
+    "params": {"delay_minutes": 25.0, "recovery_factor": 0.5}
+  },
+  {
+    "id": "CASE-67",
+    "type": "delay",
+    "question": "早高峰突发初始延误12分，系统恢复系数0.8，求第1次传播后的延误。",
+    "standard_answer": "9.6",
+    "standard_explanation": "12 * 0.8 = 9.6 分钟。",
+    "expected_type": "solve",
+    "params": {"delay_minutes": 12.0, "recovery_factor": 0.8}
+  },
+  {
+    "id": "CASE-68",
+    "type": "delay",
+    "question": "荃湾线初始延误40分，恢复系数0.6，求第3次传播后的延误残留。",
+    "standard_answer": "8.64",
+    "standard_explanation": "40 * 0.6^3 = 8.64 分钟。",
+    "expected_type": "solve",
+    "params": {"delay_minutes": 40.0, "recovery_factor": 0.6}
+  },
+  {
+    "id": "CASE-69",
+    "type": "delay",
+    "question": "列车因大雨延误50分，启用应急恢复(系数0.4)，求2阶延误。",
+    "standard_answer": "8.0",
+    "standard_explanation": "50 * 0.4^2 = 8.0 分钟。",
+    "expected_type": "solve",
+    "params": {"delay_minutes": 50.0, "recovery_factor": 0.4}
+  },
+  {
+    "id": "CASE-70",
+    "type": "delay",
+    "question": "发生未知时间晚点，评估恢复系数0.6情况下的影响。",
+    "standard_answer": "MissingParameters",
+    "standard_explanation": "缺失初始延误(delay_minutes)。",
+    "expected_type": "diagnostic",
+    "params": {"delay_minutes": null, "recovery_factor": 0.6}
+  },
+  {
+    "id": "CASE-71",
+    "type": "delay",
+    "question": "港岛线初始延误18分，恢复系数0.5，求第4阶段延误。",
+    "standard_answer": "1.125",
+    "standard_explanation": "18 * 0.5^4 = 1.125 分钟。",
+    "expected_type": "solve",
+    "params": {"delay_minutes": 18.0, "recovery_factor": 0.5}
+  },
+  {
+    "id": "CASE-72",
+    "type": "delay",
+    "question": "东铁线初始延误35分，晚高峰恢复系数0.7，求2阶延误。",
+    "standard_answer": "17.15",
+    "standard_explanation": "35 * 0.7^2 = 17.15 分钟。",
+    "expected_type": "solve",
+    "params": {"delay_minutes": 35.0, "recovery_factor": 0.7}
+  },
+  {
+    "id": "CASE-73",
+    "type": "rescheduling",
+    "question": "系统累积延误50分，调度挽回30分，求净延误。",
+    "standard_answer": "20.0",
+    "standard_explanation": "50 - 30 = 20.0 分钟。",
+    "expected_type": "solve",
+    "params": {"delay_minutes": 50.0, "recovered_minutes": 30.0}
+  },
+  {
+    "id": "CASE-74",
+    "type": "rescheduling",
+    "question": "严重故障延误90分，全力压缩停站挽回45分，求残留延误。",
+    "standard_answer": "45.0",
+    "standard_explanation": "90 - 45 = 45.0 分钟。",
+    "expected_type": "solve",
+    "params": {"delay_minutes": 90.0, "recovered_minutes": 45.0}
+  },
+  {
+    "id": "CASE-75",
+    "type": "rescheduling",
+    "question": "轻微延误20分，备用车底可挽回20分，求残留延误。",
+    "standard_answer": "0.0",
+    "standard_explanation": "20 - 20 = 0.0 分钟，完全恢复。",
+    "expected_type": "solve",
+    "params": {"delay_minutes": 20.0, "recovered_minutes": 20.0}
+  },
+  {
+    "id": "CASE-76",
+    "type": "rescheduling",
+    "question": "台风后累积延误150分，系统最大挽回能力100分，求净延误。",
+    "standard_answer": "50.0",
+    "standard_explanation": "150 - 100 = 50.0 分钟。",
+    "expected_type": "solve",
+    "params": {"delay_minutes": 150.0, "recovered_minutes": 100.0}
+  },
+  {
+    "id": "CASE-77",
+    "type": "rescheduling",
+    "question": "挽回能力已知为20分，请求最优重调度排班。",
+    "standard_answer": "MissingParameters",
+    "standard_explanation": "缺失总延误分钟数。",
+    "expected_type": "diagnostic",
+    "params": {"delay_minutes": null, "recovered_minutes": 20.0}
+  },
+  {
+    "id": "CASE-78",
+    "type": "rescheduling",
+    "question": "4列车延误35分，系统压缩可挽回18分，求残留延误。",
+    "standard_answer": "17.0",
+    "standard_explanation": "35 - 18 = 17.0 分钟。",
+    "expected_type": "solve",
+    "params": {"delay_minutes": 35.0, "recovered_minutes": 18.0}
+  },
+  {
+    "id": "CASE-79",
+    "type": "rescheduling",
+    "question": "延误75分，提速与压缩停站共挽回60分，求净延误。",
+    "standard_answer": "15.0",
+    "standard_explanation": "75 - 60 = 15.0 分钟。",
+    "expected_type": "solve",
+    "params": {"delay_minutes": 75.0, "recovered_minutes": 60.0}
+  },
+  {
+    "id": "CASE-80",
+    "type": "timetabling",
+    "question": "10个班次，运行200s，停站40s，间隔150s，求总时刻表跨度。",
+    "standard_answer": "1590.0",
+    "standard_explanation": "跨度 = 9*150 + (200+40) = 1590s。",
+    "expected_type": "solve",
+    "params": {"trip_count": 10, "run_time_sec": 200, "dwell_time_sec": 40, "min_headway": 150}
+  },
+  {
+    "id": "CASE-81",
+    "type": "timetabling",
+    "question": "5个班次，间隔300s，运行120s，停站30s，求跨度。",
+    "standard_answer": "1350.0",
+    "standard_explanation": "跨度 = 4*300 + 150 = 1350s。",
+    "expected_type": "solve",
+    "params": {"trip_count": 5, "run_time_sec": 120, "dwell_time_sec": 30, "min_headway": 300}
+  },
+  {
+    "id": "CASE-82",
+    "type": "timetabling",
+    "question": "15个班次，间隔120s，运行180s，停站20s，求最优跨度。",
+    "standard_answer": "1880.0",
+    "standard_explanation": "跨度 = 14*120 + 200 = 1880s。",
+    "expected_type": "solve",
+    "params": {"trip_count": 15, "run_time_sec": 180, "dwell_time_sec": 20, "min_headway": 120}
+  },
+  {
+    "id": "CASE-83",
+    "type": "timetabling",
+    "question": "已知单次运行150s，停站30s，间隔120s，求全天时刻跨度。",
+    "standard_answer": "MissingParameters",
+    "standard_explanation": "缺失发车班次总数(trip_count)。",
+    "expected_type": "diagnostic",
+    "params": {"trip_count": null, "run_time_sec": 150, "dwell_time_sec": 30, "min_headway": 120}
+  },
+  {
+    "id": "CASE-84",
+    "type": "timetabling",
+    "question": "8个班次，单耗150s，停站35s，间隔200s，求跨度。",
+    "standard_answer": "1585.0",
+    "standard_explanation": "跨度 = 7*200 + 185 = 1585s。",
+    "expected_type": "solve",
+    "params": {"trip_count": 8, "run_time_sec": 150, "dwell_time_sec": 35, "min_headway": 200}
+  },
+  {
+    "id": "CASE-85",
+    "type": "rolling_stock",
+    "question": "90任务交路，可用40列车，物理需38列，求可行性。",
+    "standard_answer": "Feasible",
+    "standard_explanation": "38 ≤ 40，车底资源满足调度需求。",
+    "expected_type": "solve",
+    "params": {"trip_set_size": 90, "fleet_size": 40, "min_required_theoretical": 38}
+  },
+  {
+    "id": "CASE-86",
+    "type": "rolling_stock",
+    "question": "100任务，可用20列车，理论最低需25列，求状态。",
+    "standard_answer": "Infeasible",
+    "standard_explanation": "25 > 20，运力供给严重不足。",
+    "expected_type": "diagnostic",
+    "params": {"trip_set_size": 100, "fleet_size": 20, "min_required_theoretical": 25}
+  },
+  {
+    "id": "CASE-87",
+    "type": "rolling_stock",
+    "question": "120任务，可用50列车，需50列车底，求状态。",
+    "standard_answer": "Optimal",
+    "standard_explanation": "50 ≤ 50，极限可行。",
+    "expected_type": "solve",
+    "params": {"trip_set_size": 120, "fleet_size": 50, "min_required_theoretical": 50}
+  },
+  {
+    "id": "CASE-88",
+    "type": "rolling_stock",
+    "question": "荃湾线车底分配优化，可用28列车。",
+    "standard_answer": "MissingParameters",
+    "standard_explanation": "缺失任务集合大小(trip_set_size)。",
+    "expected_type": "diagnostic",
+    "params": {"trip_set_size": null, "fleet_size": 28}
+  },
+  {
+    "id": "CASE-89",
+    "type": "rolling_stock",
+    "question": "75任务，可用28列车，理论最少需30列，求排班可行性。",
+    "standard_answer": "Infeasible",
+    "standard_explanation": "30 > 28，车辆短缺。",
+    "expected_type": "diagnostic",
+    "params": {"trip_set_size": 75, "fleet_size": 28, "min_required_theoretical": 30}
+  },
+  {
+    "id": "CASE-90",
+    "type": "crew",
+    "question": "80个排班任务，30组司机，需22组，求最优派班状态。",
+    "standard_answer": "Optimal",
+    "standard_explanation": "22 ≤ 30，人力资源充足。",
+    "expected_type": "solve",
+    "params": {"trip_set_size": 80, "crew_size": 30, "min_crew_theoretical": 22}
+  },
+  {
+    "id": "CASE-91",
+    "type": "crew",
+    "question": "50任务，仅有15组司机，排班最低需18组，求状态。",
+    "standard_answer": "Infeasible",
+    "standard_explanation": "18 > 15，人员不足以覆盖任务。",
+    "expected_type": "diagnostic",
+    "params": {"trip_set_size": 50, "crew_size": 15, "min_crew_theoretical": 18}
+  },
+  {
+    "id": "CASE-92",
+    "type": "crew",
+    "question": "120任务，可用45名司机，最低要求40名，求排班最优解。",
+    "standard_answer": "Optimal",
+    "standard_explanation": "40 ≤ 45，排班可行。",
+    "expected_type": "solve",
+    "params": {"trip_set_size": 120, "crew_size": 45, "min_crew_theoretical": 40}
+  },
+  {
+    "id": "CASE-93",
+    "type": "crew",
+    "question": "港岛线司机优化安排，需覆盖全天排班。",
+    "standard_answer": "MissingParameters",
+    "standard_explanation": "缺失任务数量和可用司机总数。",
+    "expected_type": "diagnostic",
+    "params": {"trip_set_size": null, "crew_size": null}
+  },
+  {
+    "id": "CASE-94",
+    "type": "crew",
+    "question": "45任务，可用12名司机，排班算法下界需15名，求状态。",
+    "standard_answer": "Infeasible",
+    "standard_explanation": "15 > 12，人力限制导致不可行。",
+    "expected_type": "diagnostic",
+    "params": {"trip_set_size": 45, "crew_size": 12, "min_crew_theoretical": 15}
+  },
+  {
+    "id": "CASE-95",
+    "type": "passenger_assignment",
+    "question": "4节点网络，总OD需求25000人次，求路径客流分配。",
+    "standard_answer": "Optimal",
+    "standard_explanation": "基础守恒方程无额外阻力，可实现全局流量平衡分配。",
+    "expected_type": "solve",
+    "params": {"OD_matrix_total": 25000}
+  },
+  {
+    "id": "CASE-96",
+    "type": "passenger_assignment",
+    "question": "5节点环线，断面总需求42000人次，求客流均衡分配方案。",
+    "standard_answer": "Optimal",
+    "standard_explanation": "网络流均衡分配完成。",
+    "expected_type": "solve",
+    "params": {"OD_matrix_total": 42000}
+  },
+  {
+    "id": "CASE-97",
+    "type": "passenger_assignment",
+    "question": "双节点穿梭线路，总客流8000人次，求分配结果。",
+    "standard_answer": "Optimal",
+    "standard_explanation": "全有或全无分配至单一路径。",
+    "expected_type": "solve",
+    "params": {"OD_matrix_total": 8000}
+  },
+  {
+    "id": "CASE-98",
+    "type": "crowding",
+    "question": "金钟站早高峰到达400人/分，疏散能力500人/分，求利用率。",
+    "standard_answer": "0.8",
+    "standard_explanation": "ρ = 400/500 = 0.8，系统稳定。",
+    "expected_type": "solve",
+    "params": {"station_flow_arrival": 400, "station_service_rate": 500}
+  },
+  {
+    "id": "CASE-99",
+    "type": "crowding",
+    "question": "旺角站突发到达900人/分，最大疏散能力仅600人/分，评估站台排队状态。",
+    "standard_answer": "Unbounded",
+    "standard_explanation": "ρ = 1.5 > 1.0，到达超过疏散，排队将无限发散，触发Unbounded。",
+    "expected_type": "diagnostic",
+    "params": {"station_flow_arrival": 900, "station_service_rate": 600}
+  },
+  {
+    "id": "CASE-100",
+    "type": "crowding",
+    "question": "中环站换乘大客流到达1200人/分，闸机全开疏散能力1000人/分，求拥挤状态。",
+    "standard_answer": "Unbounded",
+    "standard_explanation": "需求大于运力（1200 > 1000），积压无界限。",
+    "expected_type": "diagnostic",
+    "params": {"station_flow_arrival": 1200, "station_service_rate": 1000}
+  },
+  {
+    "id": "CASE-101",
+    "type": "crowding",
+    "question": "北角站客流到达550人/分，疏散能力650人/分，求利用率。",
+    "standard_answer": "0.846",
+    "standard_explanation": "ρ = 550/650 = 0.846。",
+    "expected_type": "solve",
+    "params": {"station_flow_arrival": 550, "station_service_rate": 650}
+  },
+  {
+    "id": "CASE-102",
+    "type": "crowding",
+    "question": "九龙塘站疏散能力800人/分，评估拥挤风险。",
+    "standard_answer": "MissingParameters",
+    "standard_explanation": "未给出进站到达率。",
+    "expected_type": "diagnostic",
+    "params": {"station_flow_arrival": null, "station_service_rate": 800}
+  },
+  {
+    "id": "CASE-103",
+    "type": "energy",
+    "question": "站间距12.5km，限速110km/h，目标耗时600s，求最优节能点。",
+    "standard_answer": "Optimal",
+    "standard_explanation": "非线性模型成功求解惰行切入点，实现能耗最低。",
+    "expected_type": "solve",
+    "params": {"distance": 12.5, "speed_limit": 110}
+  },
+  {
+    "id": "CASE-104",
+    "type": "energy",
+    "question": "6.0km短区间，最高限速80km/h，寻优牵引能耗曲线。",
+    "standard_answer": "Optimal",
+    "standard_explanation": "完成单车牵引节能优化。",
+    "expected_type": "solve",
+    "params": {"distance": 6.0, "speed_limit": 80}
+  },
+  {
+    "id": "CASE-105",
+    "type": "energy",
+    "question": "优化某站间牵引能耗，最高速度限制90km/h。",
+    "standard_answer": "MissingParameters",
+    "standard_explanation": "缺少站间距参数。",
+    "expected_type": "diagnostic",
+    "params": {"distance": null, "speed_limit": 90}
+  },
+  {
+    "id": "CASE-106",
+    "type": "regenerative",
+    "question": "列车制动发电1000kW，对向有列车需牵引功率800kW，求最优时距同步及利用率。",
+    "standard_answer": "80%",
+    "standard_explanation": "发电量经折损后满足800kW需求，800/1000=80% 能量被利用。",
+    "expected_type": "solve",
+    "params": {"generated_power": 1000, "required_power": 800}
+  },
+  {
+    "id": "CASE-107",
+    "type": "regenerative",
+    "question": "发电500kW，对向需重载牵引1500kW，求吸收利用率。",
+    "standard_answer": "100%",
+    "standard_explanation": "发电端处于绝对劣势，所有可用再生能量（扣除损耗）将被100%吸收。",
+    "expected_type": "solve",
+    "params": {"generated_power": 500, "required_power": 1500}
+  },
+  {
+    "id": "CASE-108",
+    "type": "regenerative",
+    "question": "发电900kW，区间内无其他列车牵引(0kW)，求利用率。",
+    "standard_answer": "0%",
+    "standard_explanation": "供需不匹配，0吸收。",
+    "expected_type": "solve",
+    "params": {"generated_power": 900, "required_power": 0}
+  },
+  {
+    "id": "CASE-109",
+    "type": "network_flow",
+    "question": "8节点网络，客流疏散需求600，边容量约束800，求网络流。",
+    "standard_answer": "Optimal",
+    "standard_explanation": "需求(600) ≤ 路径最大通流(800)，可寻得最小成本流。",
+    "expected_type": "solve",
+    "params": {"total_demand_flow": 600, "arc_capacity_limit": 800}
+  },
+  {
+    "id": "CASE-110",
+    "type": "network_flow",
+    "question": "10节点应急疏散，总需求1000，瓶颈边最大通流能力700，求指派状态。",
+    "standard_answer": "Infeasible",
+    "standard_explanation": "需求1000超过割集容量700，违反流量守恒与容量限制，无解。",
+    "expected_type": "diagnostic",
+    "params": {"total_demand_flow": 1000, "arc_capacity_limit": 700}
+  }
+]

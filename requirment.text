@@ -1,0 +1,14 @@
+# Network & API
+requests>=2.31.0
+
+# Operations Research Solver
+gurobipy>=12.0.0
+
+# Data Processing & Math
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Visualization & Network (Optional for base execution)
+networkx>=3.0
+matplotlib>=3.7.0
+folium>=0.14.0
