@@ -22,7 +22,10 @@ pip install -r requirements.txt
 
 ### 2. Prerequisites
 - A valid [Gurobi Optimizer License](https://www.gurobi.com/) must be installed on your machine.
-- You will be prompted to enter your LLM API Key (Qwen / DeepSeek / OpenAI-compatible) when running the system.
+- **LLM API Configuration:** The system supports Qwen, DeepSeek, and OpenAI-compatible endpoints. For security and seamless execution, it is highly recommended to configure your API key as an environment variable before running:
+  ```bash
+  export QWEN_API_KEY="your_api_key_here"
+  # Or use DEEPSEEK_API_KEY / GPT_PROXY_API_KEY depending on your provider
 
 ### 3. Run the Interactive CLI
 The system provides a terminal-based interactive interface for testing scheduling scenarios:
